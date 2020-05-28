@@ -15735,6 +15735,7 @@ namespace ts {
 
                 if (isLiteralType(source) && !typeCouldHaveTopLevelSingletonTypes(target)) {
                     generalizedSource = getBaseTypeOfLiteralType(source);
+                    Debug.assert(!isTypeAssignableTo(generalizedSource, target), "generalized source shouldn't be assignable");
                     generalizedSourceType = getTypeNameForErrorDisplay(generalizedSource);
                 }
 
@@ -17372,6 +17373,7 @@ namespace ts {
             // Okay, yes, 'boolean' is a union of 'true | false', but that's not useful
             // in error reporting scenarios. If you need to use this function but that detail matters,
             // feel free to add a flag.
+            let x: string | boolean;
             if (type.flags & TypeFlags.Boolean) {
                 return false;
             }
